@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    mixmax (0.1.0)
+    mixmax (0.1.1)
       httparty (~> 0.16.4)
 
 GEM

@@ -1,3 +1,3 @@
-module Mixmax
+class Mixmax
   VERSION = "0.1.1"
 end

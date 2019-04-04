@@ -1,20 +1,27 @@
-require "mixmax/version"
+require_relative "mixmax/version"
 require "httparty"
 
-module Mixmax
+class Mixmax
   include HTTParty
+
+  def initialize(api_key)
+    @headers = { "X-API-Token" => api_key}
+  end
+
   base_uri "api.mixmax.com"
-  # api_key = '90aa4d9c-53a0-41a8-860e-7a995a9a2f4e'
-  # headers = {
-  #   "X-API-Token" => api_key
-  # }
 
+  def sequences
+    self.class.get("/v1/sequences", headers: @headers).parsed_response["results"]
+  end
 
-  def self.sequences
-    get("/v1/sequences", :headers => { "X-API-Token" => "90aa4d9c-53a0-41a8-860e-7a995a9a2f4e"})
+  def sequence_recipients(id)
+    self.class.get("/v1/sequences/#{id}", headers: @headers)
+  end
+  
+  def add_to_sequence(id, recipients)
+    self.class.post("/v1/sequences/#{id}/recipients", headers: @headers, body: recipients)
   end
 end
 
 
-# Mixmax.add_to_sequence(id, recipients)
-# Mixmax.sequences
+
