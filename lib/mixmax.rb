@@ -8,16 +8,20 @@ class Mixmax
     @headers = { "X-API-Token" => api_key, "Content-Type" => "application/json"}
   end
 
-  base_uri "api.mixmax.com"
+  base_uri "https://api.mixmax.com"
 
   def sequences
     self.class.get("/v1/sequences", headers: @headers).parsed_response["results"]
   end
 
+  def sequence(id)
+    self.class.get("/v1/sequences/#{id}", headers: @headers).parsed_response
+  end
+
   def sequence_recipients(id)
     self.class.get("/v1/sequences/#{id}/recipients", headers: @headers)
   end
-  
+
   def add_to_sequence(id, recipients)
     self.class.post("/v1/sequences/#{id}/recipients", headers: @headers, body: recipients)
   end
