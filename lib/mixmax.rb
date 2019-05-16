@@ -10,8 +10,8 @@ class Mixmax
 
   base_uri "https://api.mixmax.com"
 
-  def sequences
-    self.class.get("/v1/sequences", headers: @headers).parsed_response["results"]
+  def sequences(query = {})
+    self.class.get("/v1/sequences", headers: @headers, query: query).parsed_response["results"]
   end
 
   def sequence(id)
