@@ -18,16 +18,16 @@ class Mixmax
     get('/v1/sequences', query: query)['results']
   end
 
-  def sequence(id)
-    get "/v1/sequences/#{id}"
+  def sequence(sequence_id)
+    get "/v1/sequences/#{sequence_id}"
   end
 
-  def sequence_recipients(id)
-    get "/v1/sequences/#{id}/recipients"
+  def sequence_recipients(sequence_id)
+    get "/v1/sequences/#{sequence_id}/recipients"
   end
 
-  def add_to_sequence(id, recipients:)
-    post "/v1/sequences/#{id}/recipients", query: recipients
+  def add_to_sequence(sequence_id, recipients:)
+    post "/v1/sequences/#{sequence_id}/recipients", query: recipients
   end
 
   def user_preferences
@@ -38,7 +38,7 @@ class Mixmax
     patch '/v1/userpreferences/me', body: query
   end
 
-  def remove_recipient_from_sequence(sequence_id:, emails:)
+  def remove_recipient_from_sequence(sequence_id, emails:)
     post "/v1/sequences/#{sequence_id}/cancel", query: { emails: Array(emails) }
   end
 
