@@ -14,11 +14,19 @@ class Mixmax
 
   base_uri 'https://api.mixmax.com'
 
-  def sequences(query: {})
-    get('/v1/sequences', query: query)['results']
+  def sequences(query: {}, all: false)
+    sequences = []
+    next_param = ''
+
+    loop do
+      response = get "/v1/sequences/#{next_param}"
+      sequences += response['results']
+      return sequences unless response['hasNext'] && all
+      next_param = "?next=#{response['next']}"
+    end
   end
 
-  def sequence(sequence_id)
+  def sequence(sequence_id, bring_all: false)
     get "/v1/sequences/#{sequence_id}"
   end
 
