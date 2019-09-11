@@ -26,7 +26,7 @@ class Mixmax
     end
   end
 
-  def sequence(sequence_id, bring_all: false)
+  def sequence(sequence_id)
     get "/v1/sequences/#{sequence_id}"
   end
 
