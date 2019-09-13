@@ -53,7 +53,7 @@ class Mixmax
   private
 
   def get(route, query: {})
-    self.class.get(route, headers: headers, body: query.to_json).parsed_response
+    self.class.get(route, headers: headers, query: query).parsed_response
   end
 
   def post(route, query: {})
