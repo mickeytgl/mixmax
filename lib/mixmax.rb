@@ -19,7 +19,7 @@ class Mixmax
     next_param = ''
 
     loop do
-      response = get "/v1/sequences/#{next_param}"
+      response = get "/v1/sequences/#{next_param}", query: query
       sequences += response['results']
       return sequences unless response['hasNext'] && all
       next_param = "?next=#{response['next']}"
