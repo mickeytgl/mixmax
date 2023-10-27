@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'mixmax/version'
 require 'httparty'
 
@@ -22,6 +24,7 @@ class Mixmax
       response = get "/v1/sequences/#{next_param}", query: query
       sequences += response['results']
       return sequences unless response['hasNext'] && all
+
       next_param = "?next=#{response['next']}"
     end
   end
